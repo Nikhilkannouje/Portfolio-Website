@@ -3,7 +3,7 @@
   "private": true,
   "description": "Static portfolio for Nikhil Kannouje. No runtime dependencies; site/ is deployed as-is.",
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": { "node": ">=22" },
   "scripts": {
     "serve": "node tools/serve.mjs 5173",
     "test": "node --test \"tests/*.test.mjs\""
