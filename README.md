@@ -7,7 +7,7 @@ A plain static site with no build step or runtime dependencies: `site/` is deplo
 ```
 site/
   index.html            Home: hero, §01 capabilities, §02 work (model cards), §03 approach, §04 skills, §05 about, contact
-  styles.css            Design tokens + components (SIGNAL-inspired: paper/graphite themes, mono labels, serif accent)
+  styles.css            Design tokens + components (teal/gold light + dark themes, Space Grotesk + IBM Plex)
   theme-init.js         Applies the saved/OS theme before paint (no flash, no inline script)
   site.js               Theme toggle, mobile menu, copy-email, header hairline
   _headers              Strict CSP + security headers (Netlify / Cloudflare Pages format)
@@ -56,7 +56,9 @@ GitHub Pages: publish the `site/` folder.
 
 ## Design system
 
-The visual language follows the SIGNAL spec (tokens, type scale, model cards, honesty components).
+The structure borrows from the SIGNAL spec (token system, project cards, honesty components) with its own
+identity: teal + gold palette, Space Grotesk / IBM Plex type, highlighter accent words, dot texture and
+rounded cards. The theme layer sits at the end of `styles.css`.
 Deliberately left out to keep the site simple: boot loader, custom cursor, neural dot-field,
 glyph-decode headings, marquee and portrait animations. The only animation is the pulsing "live" dot,
 and `prefers-reduced-motion` disables all motion.
