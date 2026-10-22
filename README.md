@@ -1,6 +1,6 @@
 # Nikhil Kannouje — Portfolio
 
-[![test](https://github.com/Nikhilkannouje/portfolio/actions/workflows/test.yml/badge.svg)](https://github.com/Nikhilkannouje/portfolio/actions/workflows/test.yml)
+[![test](https://github.com/Nikhilkannouje/Portfolio-Website/actions/workflows/test.yml/badge.svg)](https://github.com/Nikhilkannouje/Portfolio-Website/actions/workflows/test.yml)
 
 A plain static site with no build step or runtime dependencies: `site/` is deployed as-is.
 
