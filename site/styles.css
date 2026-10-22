@@ -412,3 +412,4 @@ em.serif { font-family: var(--serif); font-style: italic; font-weight: 400; lett
 .certs__also { margin-top: 24px; }
 @media (max-width: 1099px) { .certs { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 699px) { .certs { grid-template-columns: 1fr; } }
+@media (max-width: 560px) { .hide-sm { display: none; } }
