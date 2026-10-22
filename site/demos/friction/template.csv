@@ -1,0 +1,2 @@
+participant_id,role,task,category,minutes_per_week,times_per_week,friction_1to5,repetitive,notes
+P01,Design student,Exporting renders in multiple sizes,asset-prep,60,3,4,yes,"Optional free-text note"

@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>CMF Variant Generator — v0 prototype</title>
+  <script src="../../theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../demos.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <svg class="sr-only" aria-hidden="true">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../../">Nikhil Kannouje <span class="label label--sm">AI Generalist</span></a>
+      <nav class="nav" aria-label="Main">
+        <a class="btn btn--sm" href="https://github.com/Nikhilkannouje/portfolio/tree/main/site/demos/cmf" target="_blank" rel="noopener noreferrer">Code ↗</a>
+        <a class="btn btn--sm" href="../../#work">← All work</a>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">
+          <svg class="theme-icon--light" aria-hidden="true"><use href="#i-moon"/></svg>
+          <svg class="theme-icon--dark" aria-hidden="true"><use href="#i-sun"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="demo-hero paper-grid">
+      <div class="wrap">
+        <p class="crumbs label label--sm"><a href="../../">Home</a> / <a href="../../#work">Work</a> / CS/02</p>
+        <h1 class="h1 accent">CMF <em class="serif">variants</em>, region by region.</h1>
+        <p class="lede">Select a region of a product render, then compare colour and finish variants while the rest of the image stays untouched.</p>
+        <div class="demo-meta">
+          <span class="badge badge--progress"><span class="dot"></span>Prototype v0</span>
+          <span class="demo-tag">No AI model in v0</span>
+          <span class="label label--sm muted">Runs in your browser · nothing uploaded</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="wrap">
+        <div class="term-panel">
+          <span class="reg" aria-hidden="true"></span>
+          <div class="term__bar"><i></i><i></i><i></i><span class="spacer"></span>cmf-variant-generator · v0</div>
+          <div class="tool">
+            <div class="tool__controls">
+              <div class="field">
+                <label class="label label--sm" for="file">01 · Image</label>
+                <input id="file" type="file" accept="image/png,image/jpeg,image/webp">
+                <p class="hint">Use only renders you own or have permission to use. A sample illustration drawn in code loads by default.</p>
+                <div><button class="btn btn--sm" id="sample" type="button">Load sample</button></div>
+              </div>
+              <div class="field">
+                <label class="label label--sm" for="tol">02 · Tolerance: <span id="tolVal">48</span></label>
+                <input id="tol" type="range" min="5" max="120" value="48">
+                <p class="hint">Click the image to select a region. Shift-click adds to the selection.</p>
+                <div><button class="btn btn--sm" id="clear" type="button">Clear selection</button></div>
+              </div>
+              <div class="field">
+                <span class="label label--sm">03 · Colour &amp; finish</span>
+                <div class="inline">
+                  <input id="color" type="color" value="#c6402b" aria-label="Colour">
+                  <select id="finish" aria-label="Finish"></select>
+                </div>
+                <div class="btn-row">
+                  <button class="btn btn--sm btn--primary" id="apply" type="button">Add variant</button>
+                  <button class="btn btn--sm" id="batch" type="button">6 presets</button>
+                </div>
+              </div>
+            </div>
+            <div class="tool__stage">
+              <canvas id="canvas" width="900" height="520" aria-label="Product image. Click to select a region."></canvas>
+              <p id="status" class="status" role="status"></p>
+            </div>
+          </div>
+          <div class="term__foot">Selection: colour flood fill · finishes: shading-based approximations</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="wrap">
+        <p class="sec-label label">Variants</p>
+        <div id="variants" class="variants"></div>
+        <p id="variants-empty" class="empty">No variants yet. Select a region, then add a variant or generate the six presets.</p>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="wrap">
+        <p class="sec-label label">Scope</p>
+        <div class="panel">
+          <h2>What v0 does — and doesn't.</h2>
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th>Capability</th><th>This demo (v0)</th><th>Planned</th></tr></thead>
+              <tbody>
+                <tr><td>Region selection</td><td>Colour flood fill; struggles with textures and similar neighbouring colours</td><td>Segment Anything (SAM) masks from a click or box</td></tr>
+                <tr><td>Colour change</td><td>Recolour that keeps the original shading</td><td>Same, on cleaner masks</td></tr>
+                <tr><td>Materials</td><td>Matte / satin / gloss / metallic as shading approximations</td><td>Inpainting for real textures (leather, fabric, brushed metal)</td></tr>
+                <tr><td>Unselected regions</td><td>Pixel-identical to the original (tested)</td><td>Preserved as far as the inpainting method allows</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="note"><svg aria-hidden="true"><use href="#i-info"/></svg><span><strong>Not a material simulator.</strong> Outputs are for quick visual comparison, not colour-accurate production renders.</span></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="../../site.js"></script>
+  <script type="module" src="cmf.js"></script>
+</body>
+</html>

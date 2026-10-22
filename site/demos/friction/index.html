@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Designer Workflow Friction Audit — dashboard prototype</title>
+  <script src="../../theme-init.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&amp;family=Instrument+Serif:ital@0;1&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap">
+  <link rel="stylesheet" href="../../styles.css">
+  <link rel="stylesheet" href="../demos.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <svg class="sr-only" aria-hidden="true">
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></symbol>
+    <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  </svg>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="wordmark" href="../../">Nikhil Kannouje <span class="label label--sm">AI Generalist</span></a>
+      <nav class="nav" aria-label="Main">
+        <a class="btn btn--sm" href="https://github.com/Nikhilkannouje/portfolio/tree/main/site/demos/friction" target="_blank" rel="noopener noreferrer">Code ↗</a>
+        <a class="btn btn--sm" href="../../#work">← All work</a>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">
+          <svg class="theme-icon--light" aria-hidden="true"><use href="#i-moon"/></svg>
+          <svg class="theme-icon--dark" aria-hidden="true"><use href="#i-sun"/></svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="demo-hero paper-grid">
+      <div class="wrap">
+        <p class="crumbs label label--sm"><a href="../../">Home</a> / <a href="../../#work">Work</a> / CS/03</p>
+        <h1 class="h1 accent">Where design time <em class="serif">goes</em>.</h1>
+        <p class="lede">Which repetitive tasks cost designers the most time and frustration — and which are worth building tools for?</p>
+        <div class="demo-meta">
+          <span class="badge badge--progress"><span class="dot"></span>Dashboard prototype</span>
+          <span class="demo-tag" id="data-tag">Sample data · not research findings</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="demo-section">
+      <div class="wrap">
+        <p id="banner" class="note"><svg aria-hidden="true"><use href="#i-info"/></svg><span><strong>Sample data — not research findings.</strong> The numbers below are synthetic, created to test the dashboard. No interviews or surveys have been conducted yet. Conclusions will only be published after real responses replace this file.</span></p>
+
+        <div class="panel upload">
+          <span class="reg" aria-hidden="true"></span>
+          <div>
+            <h2 class="h4">Load your own responses</h2>
+            <p class="muted">Upload a CSV that follows the <a class="text-link" href="template.csv" download>survey template</a>. It is processed in your browser and never uploaded.</p>
+            <p id="errors" class="errors" role="alert"></p>
+          </div>
+          <div class="btn-row">
+            <label class="sr-only" for="file">CSV file</label>
+            <input id="file" type="file" accept=".csv,text/csv">
+            <button id="reset" class="btn btn--sm" type="button">Back to sample</button>
+          </div>
+        </div>
+
+        <p class="sec-label label" id="summary-label">Summary</p>
+        <div class="kpis" id="kpis" aria-labelledby="summary-label"></div>
+
+        <div class="panel">
+          <div class="panel-head"><h2>Tasks ranked by impact.</h2><span class="label label--sm muted">Higher = more time lost</span></div>
+          <p class="muted">Impact = average minutes per week × (average friction ÷ 5) × share of participants who reported the task.</p>
+          <div class="bars" id="bars"></div>
+        </div>
+
+        <div class="panel">
+          <h2>Time versus friction.</h2>
+          <p class="muted">Each circle is a task; bigger circles were reported by more participants. The top right holds the strongest candidates for tooling.</p>
+          <svg id="scatter" viewBox="0 0 640 340" role="img" aria-label="Scatter plot of average weekly minutes against average friction per task"></svg>
+        </div>
+
+        <div class="panel">
+          <h2>Pain points and candidate tools.</h2>
+          <p class="muted">Tool suggestions are hypotheses to test with participants, not proven solutions.</p>
+          <div class="table-wrap">
+            <table class="data">
+              <thead><tr><th>Task</th><th class="num">People</th><th class="num">Avg min/wk</th><th class="num">Friction</th><th class="num">Repetitive</th><th>Candidate AI / automation tool</th></tr></thead>
+              <tbody id="table"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="panel">
+          <h2>Method and limitations.</h2>
+          <ul class="method">
+            <li><strong>Participants:</strong> 5–10 designers or design students, recruited directly. Each logs the tasks that took the most time in a typical week.</li>
+            <li><strong>Measures:</strong> self-reported minutes per week, times per week, friction on a 1–5 scale, and whether the task feels repetitive.</li>
+            <li><strong>Limitations:</strong> a small convenience sample; self-reported time is approximate; results describe this group only and don't generalise to all designers.</li>
+            <li><strong>Ethics:</strong> participants are anonymised by ID, and notes are shared only with consent.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="../../site.js"></script>
+  <script type="module" src="dashboard.js"></script>
+</body>
+</html>
